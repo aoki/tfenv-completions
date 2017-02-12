@@ -1,9 +1,20 @@
 #compdef tfenv
 
 _tfenv() {
-  _values 'commands' \
-  'install[Install a specific version of Terraform]' \
-  'use[Switch a version to use]' \
-  'list[List all installed versions]' \
-  'list-remote[List all installable versions]'
+  local state
+
+  _arguments \
+    '(-h --help)'{-h,--help}'[show help]' \
+    '(-v --version)'{-v,--version}'[show version]' \
+    '*: :->commands'
+
+  case $state in
+    commands)
+      _values 'commands' \
+        'install[Install a specific version of Terraform]' \
+        'use[Switch a version to use]' \
+        'list[List all installed versions]' \
+        'list-remote[List all installable versions]'
+        ;;
+  esac
 }
